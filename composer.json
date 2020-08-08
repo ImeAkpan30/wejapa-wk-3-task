@@ -1,0 +1,5 @@
+{
+    "name": "vendor/name",
+    "type": "composer-plugin",
+    "require": {}
+}
