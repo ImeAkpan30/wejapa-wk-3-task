@@ -1,3 +1,27 @@
+<?php
+
+    if(isset($_POST['submit'])) {
+        session_start();
+
+        $_SESSION['first_name'] = htmlentities($_POST['first_name']);
+        $_SESSION['second_name'] = htmlentities($_POST['second_name']);
+        $_SESSION['email'] = htmlentities($_POST['email']);
+        $_SESSION['date_of_birth'] = htmlentities($_POST['date_of_birth']);
+        $_SESSION['color'] = htmlentities($_POST['color']);
+        $_SESSION['gender'] = htmlentities($_POST['gender']);
+        $_SESSION['department'] = htmlentities($_POST['department']);
+
+        if(empty($_POST['first_name'] || empty($_POST['second_name'] || empty($_POST['email'] || empty($_POST['date_of_birth'] ||
+            empty($_POST['color'] || empty($_POST['gender'] || empty($_POST['department'])))))))) {
+                echo "Please fill in the required fields";
+            }else{
+                header('Location: contact.php');
+            }
+       
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,31 +44,31 @@
                     <div class="card-body">
                         <p><span class="error">* required field</span></p>
                         <p class="card-text">
-                        <form method="post" action="contact.php" id="nameform">
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" id="nameform">
 
                             <div class="input-group mb-5">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text required">First Name </span>
                                 </div>
-                                <input type="text" name="first_name" class="form-control" placeholder="Enter your first name" required>&nbsp;<span class="error">* </span>
+                                <input type="text" name="first_name" class="form-control" placeholder="Enter your first name">&nbsp;<span class="error">* </span>
                             </div>
                             <div class="input-group mb-5">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text required">Second Name </span>
                                 </div>
-                                <input type="text" name="second_name" class="form-control" placeholder="Enter your second name" required>&nbsp;<span class="error">* </span>
+                                <input type="text" name="second_name" class="form-control" placeholder="Enter your second name">&nbsp;<span class="error">* </span>
                             </div>
                             <div class="input-group mb-5">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text required">Email </span>
                                 </div>
-                                <input type="text" name="email" class="form-control" placeholder="example@gmail.com" required>&nbsp;<span class="error">* </span>
+                                <input type="text" name="email" class="form-control" placeholder="example@gmail.com">&nbsp;<span class="error">* </span>
                             </div>
                             <div class="input-group mb-5">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text required"> Date Of Birth </span>
                                 </div>
-                                <input type="date" name="date_of_birth" class="form-control" placeholder="mm/dd/yyyy" required> &nbsp;<span class="error">* </span>
+                                <input type="date" name="date_of_birth" class="form-control"   max="2020-08-09" placeholder="mm/dd/yyyy"> &nbsp;<span class="error">* </span>
                             </div>
                             <div class="input-group mb-5">
                                 <div class="input-group-prepend">
@@ -65,7 +89,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text required">Department </span>
                                 </div>
-                                <select class="form-control" name="department" required>
+                                <select class="form-control" name="department">
                                     <option>select</option>
                                     <option>IT</option>
                                     <option>HR</option>
@@ -79,13 +103,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text required">Password </span>
                                 </div>
-                                <input type="password" id="password" class="form-control" name="password" placeholder="**********" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{15,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 15 or more characters" required>&nbsp;<span class="error">* </span>
+                                <input type="password" id="password" class="form-control" name="password" placeholder="**********" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{15,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 15 or more characters">&nbsp;<span class="error">* </span>
                                 
                             </div>
 
                             <div class="form-group">
                                 
-                                <button type="submit" class="btn btn-primary" form="nameform" value="submit">Submit</button>
+                                <button type="submit" class="btn btn-primary" form="nameform" value="submit" name="submit">Submit</button>
                                 <button type="reset" class="btn btn-secondary" value="Reset">Reset</button>
                             </div>
                         </form>
